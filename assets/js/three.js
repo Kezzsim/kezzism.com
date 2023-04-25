@@ -8,6 +8,9 @@ import { WireframeGeometry2 } from 'three/addons/lines/WireframeGeometry2.js';
 let wireframe, renderer, scene, camera, controls;
 let wireframe1;
 let matLine, matLineBasic, matLineDashed;
+const mouse = new THREE.Vector2();
+const target = new THREE.Vector2();
+const windowHalf = new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2);
 
 init();
 animate();
@@ -24,7 +27,7 @@ function init() {
     camera.position.set(- 25, 0, 10);
     controls = new OrbitControls(camera, renderer.domElement);
     controls.autoRotate = true;
-    controls.enableRotate = false;
+    controls.enableRotate = true;
     controls.enablePan = false;
     controls.enableZoom = false;
     controls.minDistance = 10;
@@ -50,8 +53,10 @@ function init() {
     wireframe1.computeLineDistances();
     wireframe1.visible = false;
     scene.add(wireframe1);
+    // Event Listeners
     window.addEventListener('resize', onWindowResize);
     onWindowResize();
+    window.addEventListener('mousemove', onMouseMove, false);
 }
 // end init
 
@@ -60,14 +65,28 @@ function onWindowResize() {
     camera.aspect = box.clientWidth / box.clientHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(box.clientWidth, box.clientHeight);
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    windowHalf.set(width / 2, height / 2);
+}
+
+function onMouseMove(event) {
+    mouse.x = (event.clientX - windowHalf.x);
+    mouse.y = (event.clientY - windowHalf.x);
 }
 
 function animate() {
     let box = document.getElementById('professional-3d-1');
+    // Insert mouse input feedback if available
+    target.x = (1 - mouse.x) * 0.001;
+    target.y = (1 - mouse.y) * 0.001;
+    camera.rotation.x += 0.03 * (target.y - camera.rotation.x);
+    camera.rotation.y += 0.03 * (target.x - camera.rotation.y);
     requestAnimationFrame(animate);
     renderer.setClearColor(0x000000, 0);
     renderer.setViewport(0, 0, box.clientWidth, box.clientHeight);
-    matLine.resolution.set(box.clientWidth, box.clientHeight); // resolution of the viewport
+    // resolution of the viewport
+    matLine.resolution.set(box.clientWidth, box.clientHeight);
     renderer.render(scene, camera);
     renderer.setClearColor(0x222222, 1);
     renderer.clearDepth(); // important!
