@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { Wireframe } from 'three/addons/lines/Wireframe.js';
 import { WireframeGeometry2 } from 'three/addons/lines/WireframeGeometry2.js';
+import RINGS from './vanta.rings.min.js';
 
 let wireframe, renderer, scene, camera, controls;
 let wireframe1;
@@ -14,6 +15,8 @@ const windowHalf = new THREE.Vector2(window.innerWidth / 2, window.innerHeight /
 
 init();
 animate();
+
+// Custom based background animation
 
 function init() {
     const container = document.getElementById('professional-3d-1');
@@ -94,3 +97,10 @@ function animate() {
     renderer.setScissorTest(false);
     controls.update();
 }
+
+// Vanta based background animation
+    this.vantaEffect = RINGS({
+      el: document.getElementById('professional-3d-2'),
+      THREE: THREE,
+      backgroundAlpha: 0.30
+    })
