@@ -102,5 +102,5 @@ function animate() {
     this.vantaEffect = RINGS({
       el: document.getElementById('professional-3d-2'),
       THREE: THREE,
-      backgroundAlpha: 0.30
+      backgroundAlpha: 0.20
     })
