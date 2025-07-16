@@ -89,7 +89,7 @@
 					<h2 class="major">Science @ Scale</h2>
 					<p class="fg-text-em">Big breakthroughs require looking at the big picture; in the realm of discovery, no scientist operates alone.
 					   Experimental applications often push the boundaries of what is possible, not purely in terms of the constraints of physics, but also
-					   against the limits of data throughput and processing. Kari has joined the National Synchrotron Light Source II at Brookhaven National Laboratory
+					   against the limits of data throughput and processing. Kari has joined the <a href="https://www.bnl.gov/nsls2/">National Synchrotron Light Source II</a> at Brookhaven National Laboratory
 					   to work on new and novel architectures for scientific computing, collaborating with some of the brightest minds in the nation to bring the latest developments
 					   from industry to the cutting edge of science.
 					</p>
@@ -97,7 +97,15 @@
 						<li><a href="#second" class="button primary color1 circle icon fa-angle-right">Next</a></li>
 					</ul>
 				</div>
-			</section>			
+			</section>	
+			<!-- Written Binox Description -->
+			<section class="panel color1-alt" id="third">
+				<div class="intro color1">
+					<h2 class="major">NSLS-II</h2>
+					<p>Most people have never heard of a Synchrotron, yet for decades this type of research facility has fueled a wealth of new discoveries in material sciences, biology, chemistry and physics.</p>
+					<p>X-Rays of precise strength and cohearance are utilized for imaging, spectroscopy and tomography to offer a glimpse into an unseen world.</p>
+				</div>
+			</section>		
 			<!-- Panel (Previous Professional Work) -->
 			<section class="panel spotlight large center color1">
 				<!-- TODO : Replace with https://www.vantajs.com/-->
@@ -188,7 +196,7 @@
 										<th>Integrator</th>
 										<th>Initial API (2019)</th>
 										<th>Initial Problems</th>
-										<th>Current API (2023)</th>
+										<th>Current API (2025)</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -253,7 +261,7 @@
 			<!-- Panel (forward) -->
 			<section id="foreward" class="panel spotlight large left">
 				<div class="content span-5">
-					<h3><strong>Part 2: Creative expression</strong></h3>
+					<h3><strong>Part 3: Creative expression</strong></h3>
 					<h2 class="major">Across the digital divide</h2>
 					<p>The present landscape of media is diversified by means of engagement. People scroll through
 						accelerated web pages on their smartphones, chew through episodic videos with their TVs, listen
@@ -301,7 +309,17 @@
 				</div>
 			</section>
 			<!-- Panel -->
-			<section class="panel">
+			<section class="panel color2-alt">
+				<div class="intro color2">
+					<h2 class="major">Archives</h2>
+					<p>2018-2020</p>
+					<ul class="actions">
+						<li><a id="archive" class="button primary color1 circle icon fa-book">Next</a></li>
+					</ul>
+				</div>
+			</section>
+			<!-- Panel -->
+			<section class="panel archived" id="last">
 				<div class="intro color1-alt">
 					<h2>Mixed Reality Deck</h2>
 					<h2 class="major"><strong>at VR World NYC</strong></h2>
@@ -321,7 +339,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="panel">
+			<section class="panel archived">
 				<div class="intro color0">
 					<h2>AR Mascot app</h2>
 					<h2 class="major"><strong>Bringing life to Stonybrook's <em>Wolfie</em></strong></h2>
@@ -340,7 +358,7 @@
 				</div>
 			</section>
 			<!-- Panel -->
-			<section class="panel spotlight medium left">
+			<section class="panel spotlight medium left archived">
 				<div class="intro joined">
 					<h2 class="major">Sights and Sounds</h2>
 					<p>Truly phenomenal works feature strong appeals to our senses. It is through the eyes and ears of
@@ -362,8 +380,7 @@
 					<img src="images/Pane03.jpg" alt="Glowing speedball background" />
 				</div>
 			</section>
-
-			<!-- Panel -->
+			<!-- Footer -->
 			<section class="panel color3">
 				<div class="intro color3-alt">
 					<h2 class="major">Up and coming</h2>
@@ -379,13 +396,14 @@
 							</li>
 							<li class="icon fa-linkedin"><a href="https://www.linkedin.com/in/kezzism/">linked.in/kezzism</a></li>
 							<li class="icon fa-instagram"><a href="https://www.instagram.com/kezzism/">@kezzism</a></li>
+							<li class="icon fa-bug"><a href="https://twitter.com/Kezzism">@kezz.io</a></li>
 							<li class="icon fa-twitter"><a href="https://twitter.com/Kezzism">@kezzism</a></li>
 						</ul>
 					</div>
 				</div>
 			</section>
 			<!-- Copyright -->
-			<div class="copyright">&copy; 2023 Kari Barry. Design: <a href="https://html5up.net">HTML5 UP</a>.</div>
+			<div class="copyright">&copy; 2025 Kari Barry. Design: <a href="https://html5up.net">HTML5 UP</a>.</div>
 
 		</div>
 
@@ -408,6 +426,56 @@
 	<script src="assets/js/browser.min.js"></script>
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		// Hide all archived panels by default
+		const archivedPanels = Array.from(document.querySelectorAll('.archived'));
+		archivedPanels.forEach(panel => {
+			panel.style.display = 'none';
+			panel.style.opacity = 0;
+			panel.style.transform = 'translateX(-50px)';
+			panel.style.transition = 'opacity 0.5s, transform 0.5s';
+		});
+
+		let shown = false;
+		const archiveBtn = document.getElementById('archive');
+		const archiveSection = archiveBtn.closest('section.panel');
+
+		archiveBtn.addEventListener('click', function (e) {
+			e.preventDefault();
+			shown = !shown;
+			if (shown) {
+				// Show panels with sequential animation
+				archivedPanels.forEach((panel, i) => {
+					setTimeout(() => {
+						panel.style.display = '';
+						// Position behind the archive section
+						if (archiveSection) {
+							const rect = archiveSection.getBoundingClientRect();
+							panel.style.position = 'relative';
+							panel.style.zIndex = 1;
+						}
+						requestAnimationFrame(() => {
+							panel.style.opacity = 1;
+							panel.style.transform = 'translateX(0)';
+						});
+					}, i * 200);
+				});
+			} else {
+				// Hide panels with sequential animation (reverse order)
+				archivedPanels.slice().reverse().forEach((panel, i) => {
+					setTimeout(() => {
+						panel.style.opacity = 0;
+						panel.style.transform = 'translateX(-50px)';
+						setTimeout(() => {
+							panel.style.display = 'none';
+						}, 500);
+					}, i * 100);
+				});
+			}
+		});
+	});
+	</script>
 
 </body>
 
